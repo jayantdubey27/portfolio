@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jayant Dubey - Portfolio</title>
+    <meta name="description" content="Jayant Dubey - Java Full Stack Developer & QA Engineer Portfolio. Experienced in Spring Boot, React.js, and Selenium testing.">
+    <meta name="keywords" content="Jayant Dubey, Java Developer, Full Stack Developer, QA Engineer, Spring Boot, React.js, Selenium">
+    <meta name="author" content="Jayant Dubey">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-netlify-url.netlify.app/">
+    <meta property="og:title" content="Jayant Dubey - Portfolio">
+    <meta property="og:description" content="Java Full Stack Developer & QA Engineer Portfolio">
+    <meta property="og:image" content="https://your-netlify-url.netlify.app/Resources/photo.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://your-netlify-url.netlify.app/">
+    <meta property="twitter:title" content="Jayant Dubey - Portfolio">
+    <meta property="twitter:description" content="Java Full Stack Developer & QA Engineer Portfolio">
+    <meta property="twitter:image" content="https://your-netlify-url.netlify.app/Resources/photo.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -264,11 +281,21 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        lucide.createIcons();
-        AOS.init({
-            duration: 800,
-            once: false, // animation happens every time you scroll
-        });
+        // Initialize libraries with error handling
+        try {
+            lucide.createIcons();
+        } catch (error) {
+            console.log('Lucide icons not loaded:', error);
+        }
+        
+        try {
+            AOS.init({
+                duration: 800,
+                once: false, // animation happens every time you scroll
+            });
+        } catch (error) {
+            console.log('AOS not loaded:', error);
+        }
 
         // --- Mobile menu toggle ---
         const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -286,37 +313,43 @@
 
         // --- Text Rotator Animation ---
         const typingTextElement = document.getElementById('typing-text');
-        const titles = [
-            "Frontend Developer",
-            "Backend Developer", 
-            "Java Full Stack Developer",
-            "QA"
-        ];
-        let titleIndex = 0;
+        if (typingTextElement) {
+            const titles = [
+                "Frontend Developer",
+                "Backend Developer", 
+                "Java Full Stack Developer",
+                "QA"
+            ];
+            let titleIndex = 0;
 
-        function rotateText() {
-            // Add fade out effect
-            typingTextElement.style.opacity = '0';
-            typingTextElement.style.transform = 'translateY(10px)';
+            function rotateText() {
+                if (!typingTextElement) return;
+                
+                // Add fade out effect
+                typingTextElement.style.opacity = '0';
+                typingTextElement.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    if (!typingTextElement) return;
+                    
+                    // Change text
+                    typingTextElement.textContent = titles[titleIndex];
+                    
+                    // Add fade in effect
+                    typingTextElement.style.opacity = '1';
+                    typingTextElement.style.transform = 'translateY(0)';
+                    
+                    // Move to next title
+                    titleIndex = (titleIndex + 1) % titles.length;
+                }, 300);
+            }
+
+            // Initial text
+            typingTextElement.textContent = titles[0];
             
-            setTimeout(() => {
-                // Change text
-                typingTextElement.textContent = titles[titleIndex];
-                
-                // Add fade in effect
-                typingTextElement.style.opacity = '1';
-                typingTextElement.style.transform = 'translateY(0)';
-                
-                // Move to next title
-                titleIndex = (titleIndex + 1) % titles.length;
-            }, 300);
+            // Start rotation every 3 seconds
+            setInterval(rotateText, 3000);
         }
-
-        // Initial text
-        typingTextElement.textContent = titles[0];
-        
-        // Start rotation every 3 seconds
-        setInterval(rotateText, 3000);
 
         // --- Active Nav Link on Scroll ---
         const sections = document.querySelectorAll('section.slide');
