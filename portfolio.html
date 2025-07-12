@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jayant Dubey - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-snap-type: y mandatory;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+        }
+
+        .slide {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            box-sizing: border-box;
+            scroll-snap-align: start;
+            position: relative;
+            overflow: hidden; /* Prevents AOS animations from showing scrollbars */
+        }
+
+        /* Slide Themes */
+        #home { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: #1f2937; }
+        #about { background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); color: #1e293b; }
+        #skills { background: linear-gradient(135deg, #232526 0%, #414345 100%); color: #f3f4f6; }
+        #projects { background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); color: #1f2937; }
+        #experience { background: linear-gradient(135deg, #485563 0%, #29323c 100%); color: #f3f4f6; }
+        #resumes { background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%); color: #212529; }
+        #contact { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; }
+
+        /* Custom styles for dark slides */
+        #skills .bg-white, #experience .bg-white {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #f3f4f6;
+        }
+        #skills h2, #experience h2, #contact h2 {
+            color: #f3f4f6;
+        }
+        #skills .skill-tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        #experience .text-gray-900 { color: #f3f4f6; }
+        #experience .text-gray-600 { color: #d1d5db; }
+        #experience .border-indigo-200 { border-color: #a5b4fc; }
+        #experience .bg-indigo-200 { background-color: #a5b4fc; }
+        #experience .text-indigo-600 { color: #1e293b; }
+        #experience .ring-white { ring-color: #485563; }
+        #experience .bg-indigo-100 { background-color: #c7d2fe; color: #3730a3;}
+        
+        /* Text rotator animation */
+        #typing-text {
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
+        }
+        
+        /* Typing cursor (keeping for visual consistency) */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.8rem;
+            background-color: #1f2937;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Active Nav Link */
+        .nav-link.active {
+            color: #4f46e5;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navbar -->
+    <header class="bg-white/30 backdrop-blur-md shadow-sm fixed top-0 left-0 right-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#home" class="text-xl font-bold text-gray-900">Jayant Dubey</a>
+            <div id="desktop-nav" class="hidden md:flex space-x-6 items-center">
+                <a href="#home" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors">Home</a>
+                <a href="#about" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors">About</a>
+                <a href="#skills" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors">Skills</a>
+                <a href="#projects" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors">Projects</a>
+                <a href="#experience" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors">Experience</a>
+                <a href="#resumes" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors">Resumes</a>
+                <a href="#contact" class="nav-link text-gray-700 hover:text-indigo-600 transition-colors">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-900">
+                <i data-lucide="menu"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-white/80">
+            <a href="#home" class="nav-link block py-2 text-gray-700 hover:text-indigo-600">Home</a>
+            <a href="#about" class="nav-link block py-2 text-gray-700 hover:text-indigo-600">About</a>
+            <a href="#skills" class="nav-link block py-2 text-gray-700 hover:text-indigo-600">Skills</a>
+            <a href="#projects" class="nav-link block py-2 text-gray-700 hover:text-indigo-600">Projects</a>
+            <a href="#experience" class="nav-link block py-2 text-gray-700 hover:text-indigo-600">Experience</a>
+            <a href="#resumes" class="nav-link block py-2 text-gray-700 hover:text-indigo-600">Resumes</a>
+            <a href="#contact" class="nav-link block py-2 text-gray-700 hover:text-indigo-600">Contact</a>
+        </div>
+    </header>
+
+    <!-- Slides Container -->
+    <main>
+        <!-- Slide 1: Hero -->
+        <section id="home" class="slide">
+            <div class="text-center max-w-4xl mx-auto" data-aos="fade-in" data-aos-duration="1000">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4 leading-tight">Jayant Dubey</h1>
+                <p class="text-2xl md:text-3xl text-gray-700 mb-8">
+                    <span class="text-indigo-600 font-semibold">I am</span> <span id="typing-text"></span>
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="mailto:jayantdubey27@gmail.com" class="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition-transform transform hover:scale-105 shadow-lg">Get In Touch</a>
+                </div>
+                <div class="mt-12 flex justify-center space-x-6">
+                    <a href="https://github.com/jayantdubey27" target="_blank" class="text-gray-600 hover:text-indigo-600 transition-transform hover:scale-110"><i data-lucide="github" class="w-8 h-8"></i></a>
+                    <a href="https://linkedin.com/in/jayantdubey27" target="_blank" class="text-gray-600 hover:text-indigo-600 transition-transform hover:scale-110"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+                    <a href="mailto:jayantdubey27@gmail.com" class="text-gray-600 hover:text-indigo-600 transition-transform hover:scale-110"><i data-lucide="mail" class="w-8 h-8"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: About Me -->
+        <section id="about" class="slide">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-12" data-aos="fade-down">About Me</h2>
+                <div class="grid md:grid-cols-3 gap-8 items-center">
+                    <div class="md:col-span-1 flex justify-center" data-aos="fade-right" data-aos-delay="200">
+                        <img src="Resources/photo.jpg" alt="Jayant Dubey" class="rounded-full w-48 h-48 md:w-56 md:h-56 object-cover shadow-lg">
+                    </div>
+                    <div class="md:col-span-2 text-lg text-left" data-aos="fade-left" data-aos-delay="400">
+                        <p class="mb-4">I'm a recent graduate with a B.Tech in ECE and a strong foundation in QA. My experience in testing has given me a keen eye for detail and a deep understanding of the software development lifecycle.</p>
+                        <p>My passion lies in creating software. I'm actively honing my skills in Java, Spring Boot, and React.js, and I'm eager to apply my unique blend of development knowledge and QA expertise to a Java Full Stack Developer role.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Skills -->
+        <section id="skills" class="slide">
+            <div class="w-full max-w-5xl mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-12" data-aos="fade-down">Technical Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Development</h3>
+                        <div class="flex flex-wrap justify-center gap-2">
+                            <span class="skill-tag bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Java 8</span>
+                            <span class="skill-tag bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Spring Boot</span>
+                            <span class="skill-tag bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">React.js</span>
+                            <span class="skill-tag bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Quality Assurance</h3>
+                        <div class="flex flex-wrap justify-center gap-2">
+                            <span class="skill-tag bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Selenium 4</span>
+                            <span class="skill-tag bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">API Testing</span>
+                            <span class="skill-tag bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Regression Testing</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="500">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Tools & Methods</h3>
+                        <div class="flex flex-wrap justify-center gap-2">
+                            <span class="skill-tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Jira</span>
+                            <span class="skill-tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Postman</span>
+                            <span class="skill-tag bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Git & GitHub</span>
+                            <span class="skill-tag bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Agile</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Projects -->
+        <section id="projects" class="slide">
+             <div class="w-full max-w-5xl mx-auto text-center">
+                <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-down">Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow transform hover:-translate-y-1" data-aos="flip-left" data-aos-delay="200">
+                        <h3 class="text-2xl font-semibold mb-2">Backend for Journaling App</h3>
+                        <p class="text-gray-600 mb-4">Developed a robust backend for a journaling app using Spring Boot and MongoDB, featuring secure REST APIs for all core functionalities.</p>
+                        <div class="flex flex-wrap gap-2 mt-4"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Java</span><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Spring Boot</span><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">MongoDB</span></div>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow transform hover:-translate-y-1" data-aos="flip-right" data-aos-delay="400">
+                        <h3 class="text-2xl font-semibold mb-2">E-Learning Platform Contributor</h3>
+                        <p class="text-gray-600 mb-4">Contributed to the QA of an e-learning platform, performing end-to-end testing and managing defects in an agile environment.</p>
+                        <div class="flex flex-wrap gap-2 mt-4"><span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Agile</span><span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Jira</span><span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Postman</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Experience -->
+        <section id="experience" class="slide">
+            <div class="w-full max-w-3xl mx-auto text-center">
+                <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-down">Experience</h2>
+                <div class="relative border-l-2 border-indigo-200 text-left">
+                    <div class="mb-10 ml-12" data-aos="fade-left">
+                        <span class="absolute flex items-center justify-center w-6 h-6 bg-indigo-200 rounded-full -left-3 ring-8 ring-white"><i data-lucide="briefcase" class="w-4 h-4 text-indigo-600"></i></span>
+                        <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 pl-8">QA Intern <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">Present</span></h3>
+                        <time class="block mb-2 text-sm font-normal leading-none text-gray-500">Smartworks</time>
+                        <p class="text-base font-normal text-gray-600">Conducted comprehensive testing for web and mobile apps, authored 200+ test cases, and began implementing test automation with Selenium.</p>
+                    </div>
+                    <div class="ml-12" data-aos="fade-left" data-aos-delay="200">
+                        <span class="absolute flex items-center justify-center w-6 h-6 bg-indigo-200 rounded-full -left-3 ring-8 ring-white"><i data-lucide="briefcase" class="w-4 h-4 text-indigo-600"></i></span>
+                        <h3 class="text-lg font-semibold text-gray-900 pl-8">Test Engineer Intern</h3>
+                        <time class="block mb-2 text-sm font-normal leading-none text-gray-500">GYL Digital Solution</time>
+                        <p class="text-base font-normal text-gray-600">Performed end-to-end testing for an e-learning platform within an Agile team, using Postman for API validation and Jira for project management.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Resumes -->
+        <section id="resumes" class="slide">
+            <div class="text-center" data-aos="zoom-in">
+                <h2 class="text-4xl font-bold mb-4">My Resumes</h2>
+                <p class="text-gray-700 mb-8 max-w-2xl mx-auto">Download my resumes, tailored for both Developer and QA roles.</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="Resources/Jayant_resume_dev.pdf" download="Jayant_Dubey_Developer_Resume.pdf" class="flex items-center justify-center bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-black transition-transform transform hover:scale-105 shadow-lg w-full sm:w-auto">
+                        <i data-lucide="download" class="w-5 h-5 mr-2"></i>Download Developer Resume
+                    </a>
+                    <a href="Resources/Jayant_resume_QA intern.pdf" download="Jayant_Dubey_QA_Resume.pdf" class="flex items-center justify-center bg-white text-gray-800 border border-gray-800 px-6 py-3 rounded-md hover:bg-gray-100 transition-transform transform hover:scale-105 shadow-lg w-full sm:w-auto">
+                        <i data-lucide="download" class="w-5 h-5 mr-2"></i>Download QA Resume
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Contact -->
+        <section id="contact" class="slide">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
+                <p class="mb-8 max-w-2xl mx-auto">I'm seeking new opportunities and would love to hear from you. Feel free to reach out.</p>
+                <a href="mailto:jayantdubey27@gmail.com" class="inline-block bg-white text-indigo-600 text-lg px-8 py-4 rounded-md hover:bg-gray-100 transition-transform transform hover:scale-105 shadow-lg">
+                    jayantdubey27@gmail.com
+                </a>
+                 <div class="mt-12 flex justify-center space-x-6">
+                    <a href="https://github.com/jayantdubey27" target="_blank" class="text-white hover:text-gray-200 transition-transform hover:scale-110"><i data-lucide="github" class="w-8 h-8"></i></a>
+                    <a href="https://linkedin.com/in/jayantdubey27" target="_blank" class="text-white hover:text-gray-200 transition-transform hover:scale-110"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        lucide.createIcons();
+        AOS.init({
+            duration: 800,
+            once: false, // animation happens every time you scroll
+        });
+
+        // --- Mobile menu toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- Text Rotator Animation ---
+        const typingTextElement = document.getElementById('typing-text');
+        const titles = [
+            "Frontend Developer",
+            "Backend Developer", 
+            "Java Full Stack Developer",
+            "QA"
+        ];
+        let titleIndex = 0;
+
+        function rotateText() {
+            // Add fade out effect
+            typingTextElement.style.opacity = '0';
+            typingTextElement.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                // Change text
+                typingTextElement.textContent = titles[titleIndex];
+                
+                // Add fade in effect
+                typingTextElement.style.opacity = '1';
+                typingTextElement.style.transform = 'translateY(0)';
+                
+                // Move to next title
+                titleIndex = (titleIndex + 1) % titles.length;
+            }, 300);
+        }
+
+        // Initial text
+        typingTextElement.textContent = titles[0];
+        
+        // Start rotation every 3 seconds
+        setInterval(rotateText, 3000);
+
+        // --- Active Nav Link on Scroll ---
+        const sections = document.querySelectorAll('section.slide');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.6 // 60% of the section must be visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Smooth Scrolling for Navigation Links ---
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    // Get header height for offset
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetSection.offsetTop - headerHeight;
+                    
+                    // Smooth scroll to target section
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // --- Logo click handler ---
+        const logoLink = document.querySelector('header a[href="#home"]');
+        logoLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+    </script>
+</body>
+</html>
