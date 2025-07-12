@@ -37,29 +37,25 @@
         }
 
         .slide {
-            height: 100vh;
+            min-height: 100vh;
             width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             padding: 2rem;
             padding-top: 6rem; /* Add top padding to account for fixed header */
             box-sizing: border-box;
             scroll-snap-align: start;
             position: relative;
-            overflow: hidden; /* Prevents AOS animations from showing scrollbars */
+            overflow-y: auto; /* Allow vertical scrolling within sections */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
-        /* Mobile-specific scrollable sections */
+        /* Additional mobile-specific padding */
         @media (max-width: 768px) {
             .slide {
-                min-height: 100vh;
-                height: auto;
-                justify-content: flex-start;
                 padding-top: 8rem; /* More padding on mobile for header + mobile menu */
-                overflow-y: auto; /* Allow vertical scrolling within sections on mobile only */
-                overflow-x: hidden; /* Prevent horizontal scrolling */
             }
         }
 
@@ -125,30 +121,35 @@
             position: relative;
         }
 
-        /* Custom scrollbar styling for mobile only */
+        /* Custom scrollbar styling */
+        .slide::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .slide::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+        }
+        
+        .slide::-webkit-scrollbar-thumb {
+            background: rgba(79, 70, 229, 0.5);
+            border-radius: 3px;
+        }
+        
+        .slide::-webkit-scrollbar-thumb:hover {
+            background: rgba(79, 70, 229, 0.7);
+        }
+
+        /* Section content containers */
+        .slide > div {
+            width: 100%;
+            max-width: 100%;
+            padding-bottom: 2rem; /* Add bottom padding for scrolling space */
+        }
+
+        /* Mobile-specific adjustments */
         @media (max-width: 768px) {
-            .slide::-webkit-scrollbar {
-                width: 6px;
-            }
-            
-            .slide::-webkit-scrollbar-track {
-                background: rgba(0, 0, 0, 0.1);
-                border-radius: 3px;
-            }
-            
-            .slide::-webkit-scrollbar-thumb {
-                background: rgba(79, 70, 229, 0.5);
-                border-radius: 3px;
-            }
-            
-            .slide::-webkit-scrollbar-thumb:hover {
-                background: rgba(79, 70, 229, 0.7);
-            }
-            
-            /* Mobile-specific section content containers */
             .slide > div {
-                width: 100%;
-                max-width: 100%;
                 padding-bottom: 3rem; /* More bottom padding on mobile */
             }
             
@@ -459,12 +460,10 @@
                         behavior: 'smooth'
                     });
                     
-                    // On mobile, also scroll the section content to top
-                    if (window.innerWidth <= 768) {
-                        setTimeout(() => {
-                            targetSection.scrollTop = 0;
-                        }, 500); // Wait for smooth scroll to complete
-                    }
+                    // Reset section content to top for both desktop and mobile
+                    setTimeout(() => {
+                        targetSection.scrollTop = 0;
+                    }, 500); // Wait for smooth scroll to complete
                 }
             });
         });
