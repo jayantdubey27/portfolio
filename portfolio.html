@@ -44,10 +44,18 @@
             justify-content: center;
             align-items: center;
             padding: 2rem;
+            padding-top: 6rem; /* Add top padding to account for fixed header */
             box-sizing: border-box;
             scroll-snap-align: start;
             position: relative;
             overflow: hidden; /* Prevents AOS animations from showing scrollbars */
+        }
+
+        /* Additional mobile-specific padding */
+        @media (max-width: 768px) {
+            .slide {
+                padding-top: 8rem; /* More padding on mobile for header + mobile menu */
+            }
         }
 
         /* Slide Themes */
@@ -102,6 +110,21 @@
         .nav-link.active {
             color: #4f46e5;
             font-weight: 600;
+        }
+
+        /* Ensure section headings are always visible */
+        .slide h2 {
+            margin-top: 2rem;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Mobile-specific heading adjustments */
+        @media (max-width: 768px) {
+            .slide h2 {
+                margin-top: 3rem;
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
@@ -391,7 +414,12 @@
                 if (targetSection) {
                     // Get header height for offset
                     const headerHeight = document.querySelector('header').offsetHeight;
-                    const targetPosition = targetSection.offsetTop - headerHeight;
+                    let targetPosition = targetSection.offsetTop - headerHeight;
+                    
+                    // Add extra offset for mobile
+                    if (window.innerWidth <= 768) {
+                        targetPosition -= 20; // Additional offset for mobile
+                    }
                     
                     // Smooth scroll to target section
                     window.scrollTo({
