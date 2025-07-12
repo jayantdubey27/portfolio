@@ -56,6 +56,20 @@
         /* Special styling for contact slide to ensure footer at bottom */
         #contact.slide {
             justify-content: space-between;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #contact .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #contact .footer-content {
+            margin-top: auto;
         }
 
         /* Additional mobile-specific padding */
@@ -347,51 +361,49 @@
 
         <!-- Slide 7: Contact -->
         <section id="contact" class="slide">
-            <div class="text-center w-full flex flex-col justify-between h-full" data-aos="fade-up">
-                <div class="flex flex-col justify-center flex-1">
-                    <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
-                    <p class="mb-8 max-w-2xl mx-auto">I'm seeking new opportunities and would love to hear from you. Feel free to reach out.</p>
-                    <a href="mailto:jayantdubey27@gmail.com" class="inline-block bg-white text-indigo-600 text-lg px-8 py-4 rounded-md hover:bg-gray-100 transition-transform transform hover:scale-105 shadow-lg">
-                        jayantdubey27@gmail.com
-                    </a>
-                     <div class="mt-12 flex justify-center space-x-6">
-                        <a href="https://github.com/jayantdubey27" target="_blank" class="text-white hover:text-gray-200 transition-transform hover:scale-110" title="GitHub Profile"><i data-lucide="github" class="w-8 h-8"></i></a>
-                        <a href="https://linkedin.com/in/jayantdubey27" target="_blank" class="text-white hover:text-gray-200 transition-transform hover:scale-110" title="LinkedIn Profile"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
-                        <a href="https://www.hackerrank.com/profile/jayantdubey27" target="_blank" class="text-white hover:text-gray-200 transition-transform hover:scale-110" title="HackerRank Profile"><i data-lucide="code" class="w-8 h-8"></i></a>
-                        <a href="https://leetcode.com/u/jayantdubey27/" target="_blank" class="text-white hover:text-gray-200 transition-transform hover:scale-110" title="LeetCode Profile"><i data-lucide="zap" class="w-8 h-8"></i></a>
+            <div class="slide-content text-center" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
+                <p class="mb-8 max-w-2xl mx-auto">I'm seeking new opportunities and would love to hear from you. Feel free to reach out.</p>
+                <a href="mailto:jayantdubey27@gmail.com" class="inline-block bg-white text-indigo-600 text-lg px-8 py-4 rounded-md hover:bg-gray-100 transition-transform transform hover:scale-105 shadow-lg">
+                    jayantdubey27@gmail.com
+                </a>
+                 <div class="mt-12 flex justify-center space-x-6">
+                    <a href="https://github.com/jayantdubey27" target="_blank" class="text-white hover:text-gray-200 transition-transform hover:scale-110" title="GitHub Profile"><i data-lucide="github" class="w-8 h-8"></i></a>
+                    <a href="https://linkedin.com/in/jayantdubey27" target="_blank" class="text-white hover:text-gray-200 transition-transform hover:scale-110" title="LinkedIn Profile"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+                    <a href="https://www.hackerrank.com/profile/jayantdubey27" target="_blank" class="text-white hover:text-gray-200 transition-transform hover:scale-110" title="HackerRank Profile"><i data-lucide="code" class="w-8 h-8"></i></a>
+                    <a href="https://leetcode.com/u/jayantdubey27/" target="_blank" class="text-white hover:text-gray-200 transition-transform hover:scale-110" title="LeetCode Profile"><i data-lucide="zap" class="w-8 h-8"></i></a>
+                </div>
+            </div>
+            
+            <!-- Footer Section -->
+            <div class="footer-content pt-4 border-t border-white/20">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-2 md:mb-0">
+                        <h3 class="text-lg font-bold mb-1 text-white">Jayant Dubey</h3>
+                        <p class="text-white/70 text-xs">Java Full Stack Developer & QA Engineer</p>
+                    </div>
+                    <div class="flex space-x-4 mb-2 md:mb-0">
+                        <a href="https://github.com/jayantdubey27" target="_blank" class="text-white/70 hover:text-white transition-colors" title="GitHub Profile">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/jayantdubey27" target="_blank" class="text-white/70 hover:text-white transition-colors" title="LinkedIn Profile">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://www.hackerrank.com/profile/jayantdubey27" target="_blank" class="text-white/70 hover:text-white transition-colors" title="HackerRank Profile">
+                            <i data-lucide="code" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://leetcode.com/u/jayantdubey27/" target="_blank" class="text-white/70 hover:text-white transition-colors" title="LeetCode Profile">
+                            <i data-lucide="zap" class="w-5 h-5"></i>
+                        </a>
                     </div>
                 </div>
-                
-                <!-- Footer Section -->
-                <div class="pt-4 border-t border-white/20">
+                <div class="border-t border-white/20 mt-3 pt-3">
                     <div class="flex flex-col md:flex-row justify-between items-center">
-                        <div class="mb-2 md:mb-0">
-                            <h3 class="text-lg font-bold mb-1 text-white">Jayant Dubey</h3>
-                            <p class="text-white/70 text-xs">Java Full Stack Developer & QA Engineer</p>
+                        <div class="text-white/70 text-xs mb-1 md:mb-0">
+                            <p>&copy; 2024 Jayant Dubey. All rights reserved.</p>
                         </div>
-                        <div class="flex space-x-4 mb-2 md:mb-0">
-                            <a href="https://github.com/jayantdubey27" target="_blank" class="text-white/70 hover:text-white transition-colors" title="GitHub Profile">
-                                <i data-lucide="github" class="w-5 h-5"></i>
-                            </a>
-                            <a href="https://linkedin.com/in/jayantdubey27" target="_blank" class="text-white/70 hover:text-white transition-colors" title="LinkedIn Profile">
-                                <i data-lucide="linkedin" class="w-5 h-5"></i>
-                            </a>
-                            <a href="https://www.hackerrank.com/profile/jayantdubey27" target="_blank" class="text-white/70 hover:text-white transition-colors" title="HackerRank Profile">
-                                <i data-lucide="code" class="w-5 h-5"></i>
-                            </a>
-                            <a href="https://leetcode.com/u/jayantdubey27/" target="_blank" class="text-white/70 hover:text-white transition-colors" title="LeetCode Profile">
-                                <i data-lucide="zap" class="w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="border-t border-white/20 mt-3 pt-3">
-                        <div class="flex flex-col md:flex-row justify-between items-center">
-                            <div class="text-white/70 text-xs mb-1 md:mb-0">
-                                <p>&copy; 2024 Jayant Dubey. All rights reserved.</p>
-                            </div>
-                            <div class="text-white/70 text-xs">
-                                <p>Made with ❤️ by Jayant Dubey and AI Tools</p>
-                            </div>
+                        <div class="text-white/70 text-xs">
+                            <p>Made with ❤️ by Jayant Dubey and AI Tools</p>
                         </div>
                     </div>
                 </div>
