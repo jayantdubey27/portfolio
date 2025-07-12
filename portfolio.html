@@ -30,6 +30,7 @@
     <style>
         html {
             scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -157,6 +158,16 @@
                 margin-top: 3rem;
                 margin-bottom: 2rem;
                 font-size: 2.5rem;
+            }
+            
+            /* Ensure smooth scrolling on mobile */
+            .slide {
+                scroll-behavior: smooth;
+            }
+            
+            /* Better touch scrolling on mobile */
+            body {
+                -webkit-overflow-scrolling: touch;
             }
         }
     </style>
@@ -466,6 +477,54 @@
                     }, 500); // Wait for smooth scroll to complete
                 }
             });
+        });
+
+        // --- Enhanced Mobile Scroll Handling ---
+        let isScrolling = false;
+        let scrollTimeout;
+
+        function handleMobileScroll() {
+            if (window.innerWidth <= 768) {
+                const sections = document.querySelectorAll('.slide');
+                const currentScroll = window.pageYOffset;
+                const windowHeight = window.innerHeight;
+                
+                sections.forEach((section, index) => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    
+                    // Check if we're in this section
+                    if (currentScroll >= sectionTop - headerHeight - 50 && 
+                        currentScroll < sectionTop + sectionHeight - headerHeight - 50) {
+                        
+                        // Reset all sections to top
+                        sections.forEach(s => s.scrollTop = 0);
+                        
+                        // Update active nav link
+                        const sectionId = section.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+        }
+
+        // Throttled scroll event for better performance
+        window.addEventListener('scroll', () => {
+            if (!isScrolling) {
+                isScrolling = true;
+                handleMobileScroll();
+                
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    isScrolling = false;
+                }, 100);
+            }
         });
 
         // --- Logo click handler ---
