@@ -305,18 +305,70 @@
 
         <!-- Slide 4: Projects -->
         <section id="projects" class="slide">
-             <div class="w-full max-w-5xl mx-auto text-center">
+            <div class="w-full max-w-6xl mx-auto text-center">
                 <h2 class="text-4xl font-bold text-center mb-12" data-aos="fade-down">Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow transform hover:-translate-y-1" data-aos="flip-left" data-aos-delay="200">
-                        <h3 class="text-2xl font-semibold mb-2">Backend for Journaling App</h3>
-                        <p class="text-gray-600 mb-4">Developed a robust backend for a journaling app using Spring Boot and MongoDB, featuring secure REST APIs for all core functionalities.</p>
-                        <div class="flex flex-wrap gap-2 mt-4"><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Java</span><span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Spring Boot</span><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">MongoDB</span></div>
+                
+                <!-- Development Projects Section -->
+                <div class="mb-12" data-aos="fade-up">
+                    <h3 class="text-2xl font-semibold mb-8 text-indigo-600">Development Projects</h3>
+                    <div class="flex justify-center">
+                        <div class="w-full max-w-2xl">
+                            <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow transform hover:-translate-y-1" data-aos="flip-left" data-aos-delay="200">
+                                <h4 class="text-xl font-semibold mb-2">Backend Development for Journaling App</h4>
+                                <p class="text-gray-600 mb-2 text-sm font-medium">02/2024 – 05/2024</p>
+                                <p class="text-gray-600 mb-4">Developed a robust backend for a journaling application using Spring Boot. Utilized MongoDB for efficient database management and integration. Designed and implemented REST APIs, including HTTP methods such as POST, PUT, DELETE, and GET. Integrated authorization mechanisms to enhance security and user authentication.</p>
+                                <div class="flex flex-wrap gap-2 mt-4">
+                                    <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Java</span>
+                                    <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Spring Boot</span>
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">MongoDB</span>
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">REST API</span>
+                                    <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Authentication</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow transform hover:-translate-y-1" data-aos="flip-right" data-aos-delay="400">
-                        <h3 class="text-2xl font-semibold mb-2">E-Learning Platform Contributor</h3>
-                        <p class="text-gray-600 mb-4">Contributed to the QA of an e-learning platform, performing end-to-end testing and managing defects in an agile environment.</p>
-                        <div class="flex flex-wrap gap-2 mt-4"><span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Agile</span><span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Jira</span><span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Postman</span></div>
+                </div>
+
+                <!-- QA Projects Section -->
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl font-semibold mb-8 text-green-600">QA Projects</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                        <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow transform hover:-translate-y-1" data-aos="flip-left" data-aos-delay="400">
+                            <h4 class="text-xl font-semibold mb-2">WorkCtrl App — Mobile Application</h4>
+                            <p class="text-gray-600 mb-2 text-sm font-medium">04/2025 - Present</p>
+                            <p class="text-gray-600 mb-4">Led end-to-end testing for the WorkCtrl app, ensuring 99% defect-free releases by conducting smoke, sanity, and regression tests. Developed and executed 100+ test cases, increasing test coverage and improving bug detection rates by 30%.</p>
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Mobile Testing</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Smoke Testing</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Sanity Testing</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Regression Testing</span>
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Jira</span>
+                            </div>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow transform hover:-translate-y-1" data-aos="flip-right" data-aos-delay="600">
+                            <h4 class="text-xl font-semibold mb-2">SW Tickets — Mobile & Web Application</h4>
+                            <p class="text-gray-600 mb-2 text-sm font-medium">04/2025 - Present</p>
+                            <p class="text-gray-600 mb-4">Managed cross-platform testing for SW Tickets, ensuring seamless user experience across mobile and web. Created and executed 100+ test cases, identifying critical defects before deployment. Implemented Selenium automation, accelerating test execution speed by 20%.</p>
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Cross-platform</span>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Selenium 4</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Mobile Testing</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Web Testing</span>
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Jira</span>
+                            </div>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow transform hover:-translate-y-1" data-aos="flip-left" data-aos-delay="800">
+                            <h4 class="text-xl font-semibold mb-2">E-Learning Platform</h4>
+                            <p class="text-gray-600 mb-2 text-sm font-medium">06/2024 – 11/2024</p>
+                            <p class="text-gray-600 mb-4">Executed comprehensive testing including smoke, sanity, regression, retesting, UAT, integration, system, and API testing. Authored detailed test cases for comprehensive coverage. Participated in agile ceremonies and collaborated with cross-functional teams.</p>
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Agile</span>
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Jira</span>
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Postman</span>
+                                <span class="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">API Testing</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">UAT</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
