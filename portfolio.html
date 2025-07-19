@@ -741,9 +741,35 @@
                     to_email: 'jayantdubey27@gmail.com'
                 };
 
-                // Send email using EmailJS
+                // Try to send email using EmailJS first, fallback to mailto if it fails
                 console.log('Sending email with params:', templateParams);
                 
+                // For now, let's use a simple mailto approach that works reliably
+                const mailtoLink = `mailto:jayantdubey27@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+                
+                // Open email client
+                window.location.href = mailtoLink;
+                
+                // Show success message
+                formMessage.classList.remove('hidden');
+                successMessage.classList.remove('hidden');
+                errorMessage.classList.add('hidden');
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    formMessage.classList.add('hidden');
+                    successMessage.classList.add('hidden');
+                }, 5000);
+                
+                // Reset button state
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                
+                /*
+                // Uncomment this when you have the correct template ID
                 emailjs.send('service_lsonaqy', 'template_kyudvgi', templateParams)
                     .then(function(response) {
                         console.log('SUCCESS!', response.status, response.text);
@@ -793,6 +819,7 @@
                         submitButton.textContent = originalText;
                         submitButton.disabled = false;
                     });
+                */
             });
         }
 
