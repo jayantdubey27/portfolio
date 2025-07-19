@@ -707,8 +707,13 @@
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
 
-        // Initialize EmailJS (you'll need to replace these with your actual EmailJS credentials)
-        emailjs.init("YK3szG339Dzw8WlBz"); // Replace with your EmailJS user ID
+        // Initialize EmailJS
+        if (typeof emailjs !== 'undefined') {
+            emailjs.init("YK3szG339Dzw8WlBz");
+            console.log('EmailJS initialized successfully');
+        } else {
+            console.error('EmailJS library not loaded');
+        }
 
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
@@ -737,6 +742,8 @@
                 };
 
                 // Send email using EmailJS
+                console.log('Sending email with params:', templateParams);
+                
                 emailjs.send('service_lsonaqy', 'template_kyudvgi', templateParams)
                     .then(function(response) {
                         console.log('SUCCESS!', response.status, response.text);
@@ -756,17 +763,30 @@
                         }, 5000);
                     }, function(error) {
                         console.log('FAILED...', error);
+                        console.log('Error details:', error.text || error.message || error);
                         
-                        // Show error message
+                        // Show error message with more details
                         formMessage.classList.remove('hidden');
                         errorMessage.classList.remove('hidden');
                         successMessage.classList.add('hidden');
                         
-                        // Hide error message after 5 seconds
+                        // Update error message with more details
+                        const errorText = errorMessage.querySelector('strong');
+                        if (errorText) {
+                            errorText.textContent = 'Error! ' + (error.text || error.message || 'There was a problem sending your message. Please try again or email me directly.');
+                        }
+                        
+                        // Add fallback option
+                        const errorDiv = errorMessage.querySelector('div');
+                        if (errorDiv) {
+                            errorDiv.innerHTML += '<br><br><a href="mailto:jayantdubey27@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message) + '" class="text-blue-600 hover:text-blue-800 underline">Click here to send email directly</a>';
+                        }
+                        
+                        // Hide error message after 8 seconds
                         setTimeout(() => {
                             formMessage.classList.add('hidden');
                             errorMessage.classList.add('hidden');
-                        }, 5000);
+                        }, 8000);
                     })
                     .finally(() => {
                         // Reset button state
