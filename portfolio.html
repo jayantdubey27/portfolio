@@ -420,7 +420,7 @@
                 
                 <!-- Contact Form -->
                 <div class="max-w-2xl mx-auto mb-8">
-                    <form id="contactForm" class="space-y-6 text-left" data-aos="fade-up" data-aos-delay="200" action="https://form.jotform.com/251991885140060" method="POST">
+                    <form id="contactForm" class="space-y-6 text-left" data-aos="fade-up" data-aos-delay="200">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="name" class="block text-white text-sm font-medium mb-2">Name *</label>
@@ -510,6 +510,7 @@
     </main>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         // Initialize libraries with error handling
         try {
@@ -706,35 +707,72 @@
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
 
+        // Initialize EmailJS (you'll need to replace these with your actual EmailJS credentials)
+        emailjs.init("YK3szG339Dzw8WlBz"); // Replace with your EmailJS user ID
+
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(contactForm);
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const subject = formData.get('subject');
+                const message = formData.get('message');
+
                 // Show loading state
                 const submitButton = contactForm.querySelector('button[type="submit"]');
                 const originalText = submitButton.textContent;
                 submitButton.textContent = 'Sending...';
                 submitButton.disabled = true;
 
-                // JotForm will handle the submission and redirect
-                // We'll show success message after a brief delay
-                setTimeout(() => {
-                    // Show success message
-                    formMessage.classList.remove('hidden');
-                    successMessage.classList.remove('hidden');
-                    errorMessage.classList.add('hidden');
-                    
-                    // Reset form
-                    contactForm.reset();
-                    
-                    // Hide success message after 5 seconds
-                    setTimeout(() => {
-                        formMessage.classList.add('hidden');
+                // Prepare email parameters
+                const templateParams = {
+                    from_name: name,
+                    from_email: email,
+                    subject: subject,
+                    message: message,
+                    to_email: 'jayantdubey27@gmail.com'
+                };
+
+                // Send email using EmailJS
+                emailjs.send('service_lsonaqy', 'template_kyudvgi', templateParams)
+                    .then(function(response) {
+                        console.log('SUCCESS!', response.status, response.text);
+                        
+                        // Show success message
+                        formMessage.classList.remove('hidden');
+                        successMessage.classList.remove('hidden');
+                        errorMessage.classList.add('hidden');
+                        
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            formMessage.classList.add('hidden');
+                            successMessage.classList.add('hidden');
+                        }, 5000);
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                        
+                        // Show error message
+                        formMessage.classList.remove('hidden');
+                        errorMessage.classList.remove('hidden');
                         successMessage.classList.add('hidden');
-                    }, 5000);
-                    
-                    // Reset button state
-                    submitButton.textContent = originalText;
-                    submitButton.disabled = false;
-                }, 1000);
+                        
+                        // Hide error message after 5 seconds
+                        setTimeout(() => {
+                            formMessage.classList.add('hidden');
+                            errorMessage.classList.add('hidden');
+                        }, 5000);
+                    })
+                    .finally(() => {
+                        // Reset button state
+                        submitButton.textContent = originalText;
+                        submitButton.disabled = false;
+                    });
             });
         }
 
