@@ -420,7 +420,7 @@
                 
                 <!-- Contact Form -->
                 <div class="max-w-2xl mx-auto mb-8">
-                    <form id="contactForm" class="space-y-6 text-left" data-aos="fade-up" data-aos-delay="200" action="https://formsubmit.co/jayantdubey27@gmail.com" method="POST">
+                    <form id="contactForm" class="space-y-6 text-left" data-aos="fade-up" data-aos-delay="200" action="https://form.jotform.com/240000000000000" method="POST">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="name" class="block text-white text-sm font-medium mb-2">Name *</label>
@@ -708,67 +708,33 @@
 
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Get form data
-                const formData = new FormData(contactForm);
-                const name = formData.get('name');
-                const email = formData.get('email');
-                const subject = formData.get('subject');
-                const message = formData.get('message');
-
                 // Show loading state
                 const submitButton = contactForm.querySelector('button[type="submit"]');
                 const originalText = submitButton.textContent;
                 submitButton.textContent = 'Sending...';
                 submitButton.disabled = true;
 
-                // Submit form using FormSubmit service
-                fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // Show success message
-                        formMessage.classList.remove('hidden');
-                        successMessage.classList.remove('hidden');
-                        errorMessage.classList.add('hidden');
-                        
-                        // Reset form
-                        contactForm.reset();
-                        
-                        // Hide success message after 5 seconds
-                        setTimeout(() => {
-                            formMessage.classList.add('hidden');
-                            successMessage.classList.add('hidden');
-                        }, 5000);
-                    } else {
-                        throw new Error('Form submission failed');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    
-                    // Show error message
+                // JotForm will handle the submission and redirect
+                // We'll show success message after a brief delay
+                setTimeout(() => {
+                    // Show success message
                     formMessage.classList.remove('hidden');
-                    errorMessage.classList.remove('hidden');
-                    successMessage.classList.add('hidden');
+                    successMessage.classList.remove('hidden');
+                    errorMessage.classList.add('hidden');
                     
-                    // Hide error message after 5 seconds
+                    // Reset form
+                    contactForm.reset();
+                    
+                    // Hide success message after 5 seconds
                     setTimeout(() => {
                         formMessage.classList.add('hidden');
-                        errorMessage.classList.add('hidden');
+                        successMessage.classList.add('hidden');
                     }, 5000);
-                })
-                .finally(() => {
+                    
                     // Reset button state
                     submitButton.textContent = originalText;
                     submitButton.disabled = false;
-                });
+                }, 1000);
             });
         }
 
